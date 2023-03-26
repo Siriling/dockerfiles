@@ -1,28 +1,31 @@
-# sub
+# SubConverter整合
 
-GitHub [stilleshan/dockerfiles](https://github.com/stilleshan/dockerfiles)
+GitHub：[Siriling/dockerfiles](https://github.com/Siriling/dockerfiles)
 
-Docker [stilleshan/sub](https://hub.docker.com/r/stilleshan/sub)
+Docker：
 
 > *docker image support for X86 and ARM*
 
 ## 简介
-基于 subweb 和 subconverter 前后端加上 myurls 短链接整合容器，支持自定义配置.
+基于Sub-web和Subconverter前后端加上Myurls短链接整合容器，支持自定义配置
 
 ## 部署
-**注意,本项目必须搭配域名反代使用.**
+**注意，本项目必须搭配域名反代使用.**
 
 ### docker
 > 已更新支持短链接,如需要更换短链接或自己部署,请使用以下 docker compose 部署.
 ```shell
-docker run -d --name subweb --restart always \
-  -p 18080:80 \
-  -v /PATH/subweb/conf:/usr/share/nginx/html/conf \
-  stilleshan/sub
+docker run -d \
+  --name subconverter \
+  --restart=unless-stopped \
+  --net='bridge' \
+  -p 9009:80 \
+  -v /mnt/user/appdata/subconverter/conf:/usr/share/nginx/html/conf \
+  siriling/subconverter:latest
 ```
 修改挂载路径,根据需求自行修改`conf/config.js`中的相关配置.
 
-推荐使用`nginx`配置域名反向代理至`18080`端口.
+推荐使用`nginx`配置域名反向代理至`9009`端口.
 
 `subconverter`同样支持挂载外部配置文件,参考容器内部路径:`/base/snippets/rulesets.txt`.
 
@@ -36,6 +39,13 @@ docker compose 已包含 myurl 短链接:
 docker-compose up -d
 ```
 
+### docker image
+
+```shell
+docker build -t siriling/subconverter:latest .
+```
+
 ## 参考
+
 - [stilleshan/subweb](https://github.com/stilleshan/subweb)
 - [stilleshan/subconverter](https://github.com/stilleshan/subconverter)

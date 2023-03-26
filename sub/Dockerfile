@@ -8,7 +8,8 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then export PLATFORM=linux64 ; else if [ "$
   && wget https://github.com/tindy2013/subconverter/releases/download/${SUBCONVERTER_VERSION}/subconverter_${PLATFORM}.tar.gz \
   && tar xzf subconverter_${PLATFORM}.tar.gz
 RUN git clone https://github.com/Siriling/sub-web app
-RUN cd /app && npm install && npm run build
+# RUN cd /app && npm install && npm run build
+RUN cd /app && yarn install && yarn build
 
 FROM nginx:1.16-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
