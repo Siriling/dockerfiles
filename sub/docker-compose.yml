@@ -1,7 +1,7 @@
 version: "3"
 services:
   subconverter:
-    image: stilleshan/sub
+    image: siriling/sub
     container_name: sub
     ports:
       - 18080:80
@@ -10,7 +10,7 @@ services:
     restart: always
 
   myurls:
-    image: stilleshan/myurls:latest
+    image: siriling/myurls:latest
     # container_name: myurls
     environment:
       - MYURLS_DOMAIN=s.ops.ci

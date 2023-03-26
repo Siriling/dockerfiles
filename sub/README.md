@@ -1,11 +1,13 @@
 # sub
 
-GitHub [stilleshan/dockerfiles](https://github.com/stilleshan/dockerfiles)  
+GitHub [stilleshan/dockerfiles](https://github.com/stilleshan/dockerfiles)
+
 Docker [stilleshan/sub](https://hub.docker.com/r/stilleshan/sub)
+
 > *docker image support for X86 and ARM*
 
 ## 简介
-基于 subweb 和 subconverter 前后端加上 myurls 短链接整合容器,支持自定义配置.
+基于 subweb 和 subconverter 前后端加上 myurls 短链接整合容器，支持自定义配置.
 
 ## 部署
 **注意,本项目必须搭配域名反代使用.**
