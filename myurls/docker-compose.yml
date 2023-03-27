@@ -4,7 +4,7 @@ services:
     image: siriling/myurls:latest
     container_name: myurls
     restart: unless-stopped
-    network_mode: bridge
+    # network_mode: bridge
     ports:
       - "8002:8002"
     environment:
@@ -20,6 +20,6 @@ services:
     image: redis:latest
     container_name: myurls-redis
     restart: unless-stopped
-    network_mode: bridge
+    # network_mode: bridge
     volumes:
       - /root/appdata/redis/data:/data

@@ -45,6 +45,9 @@ docker run -d \
 ## docker compose
 
 - 文件下载：[docker-compose.yml](https://raw.githubusercontent.com/Siriling/dockerfiles/main/subconverter/docker-compose.yml)
+- 修改`MYURLS_DOMAIN`为你的域名
+- 修改`MYURLS_TTL`为短链接有效期（单位：天）
+- 修改`MYURLS_REDIS`为自己Redis链接（`IP:端口`）
 
 ```shell
 docker-compose up -d

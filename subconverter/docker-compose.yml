@@ -4,10 +4,13 @@ services:
     image: siriling/subconverter:latest
     container_name: subconverter
     restart: unless-stopped
-    network_mode: bridge
+    # network_mode: bridge
     ports:
       - 8080:80
       - 25500:25500
+    environment:
+      -e API_URL='http://127.0.0.1:25500'
+      -e SITE_NAME='订阅转换'
     volumes:
       - /root/appdata/subconverter/conf:/usr/share/nginx/html/conf
 
@@ -15,7 +18,7 @@ services:
     image: siriling/myurls:latest
     container_name: myurls
     restart: unless-stopped
-    network_mode: bridge
+    # network_mode: bridge
     ports:
       - "8002:8002"
     environment:
@@ -31,6 +34,6 @@ services:
     image: redis:latest
     container_name: myurls-redis
     restart: unless-stopped
-    network_mode: bridge
+    # network_mode: bridge
     volumes:
       - /root/appdata/redis/data:/data
