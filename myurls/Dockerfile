@@ -1,4 +1,5 @@
 FROM golang:1.19-alpine AS dependencies
+RUN apk add --update git
 RUN git clone https://github.com/CareyWang/MyUrls /app
 WORKDIR /app
 RUN go env -w GO111MODULE="on" && go env -w GOPROXY="https://goproxy.cn,direct"
