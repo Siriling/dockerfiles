@@ -4,7 +4,7 @@ if [ ! -f /usr/share/nginx/html/conf/config.js ]; then
 fi
 
 if [ $SITE_NAME ]; then
-  sed -i "s#订阅转换#$SITE_NAME#g" /usr/share/nginx/html/conf/config.js
+  sed -i "s#Subconverter Web#$SITE_NAME#g" /usr/share/nginx/html/conf/config.js
 fi
 
 if [ $API_URL ]; then
