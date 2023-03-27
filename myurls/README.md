@@ -40,7 +40,7 @@ docker run -d \
   -e MYURLS_DOMAIN="url.siriling.com:81" \
   -e MYURLS_TTL="90" \
   -e MYURLS_REDIS="10.10.10.254:6379" \
-  -v /root/appdata/myurls/logs:/app/logs
+  -v /root/appdata/myurls/logs:/app/logs \
   siriling/myurls:latest
 ```
 
