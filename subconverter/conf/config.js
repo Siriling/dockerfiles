@@ -1,5 +1,5 @@
 window.config = {
-  siteName: '订阅转换',
+  siteName: 'Subconverter Web',
   apiUrl: 'http://127.0.0.1:25500',
   shortUrl: 'https://url.siriling.com:81',
   menuItem: [
