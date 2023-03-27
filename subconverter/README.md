@@ -1,6 +1,4 @@
-
-
-# Myurls
+# SubConverter整合
 
 # 目录
 
@@ -16,11 +14,11 @@
 
 # 一、简介
 
-基于[CareyWang/MyUrls](https://github.com/CareyWang/MyUrls)短链接程序的修改版容器镜像，主要解决方便的自定义前端域名，自定义Redis信息以及ARM64架构的支持
+基于Sub-web和Subconverter前后端整合容器，支持自定义配置
 
 # 二、展示
 
-[https://url.siriling.com:81](https://url.siriling.com:81)
+[https://sub.siriling.com:81](https://sub.siriling.com:81)
 
 # 三、使用
 
@@ -28,28 +26,22 @@
 
 ## docker
 
-- 默认Redis无密码
-
+- 修改挂载路径，根据需求自行修改`conf/config.js`中的相关配置
+- subconverter同样支持挂载外部配置文件，参考容器内部路径:`/base/snippets/rulesets.txt`
 
 ```shell
 docker run -d \
-  --name myurls \
+  --name subconverter \
   --restart=unless-stopped \
   --net='bridge' \
-  -p 8002:8002 \
-  -e MYURLS_DOMAIN="url.siriling.com:81" \
-  -e MYURLS_TTL="90" \
-  -e MYURLS_REDIS="10.10.10.254:6379" \
-  -v /root/appdata/myurls/logs:/app/logs
-  siriling/myurls:latest
+  -p 80:80 \
+  -v /root/appdata/subconverter/conf:/usr/share/nginx/html/conf \
+  siriling/subconverter:latest
 ```
 
 ## docker compose
 
 - 文件下载：[docker-compose.yml](https://raw.githubusercontent.com/Siriling/dockerfiles/main/myurls/docker-compose.yml)
-- 修改`MYURLS_DOMAIN`为你的域名
-- 修改`MYURLS_TTL`为短链接有效期（单位：天）
-- 修改`MYURLS_REDIS`为自己Redis链接（`IP:端口`）
 
 ```shell
 docker-compose up -d
@@ -58,7 +50,7 @@ docker-compose up -d
 ## build docker image
 
 ```shell
-docker build -t siriling/myurls:latest .
+docker build -t siriling/subconverter:latest .
 ```
 
 # 四、Nginx反向代理配置
@@ -75,5 +67,5 @@ location /{
 
 # 五、仓库地址
 
-- GitHub：[Siriling/dockerfiles](https://github.com/Siriling/dockerfiles/tree/main/myurls)
-- Docker：[siriling/myurls](https://hub.docker.com/r/siriling/myurls)
+- GitHub：[Siriling/dockerfiles](https://github.com/Siriling/dockerfiles/tree/main/subconverter)
+- Docker：[siriling/subconverter](https://github.com/siriling/subconverter)
