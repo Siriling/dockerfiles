@@ -1,23 +1,27 @@
-# myurls
 
-GitHub：[stilleshan/dockerfiles](https://github.com/stilleshan/dockerfiles)
-Docker：[stilleshan/myurls](https://hub.docker.com/r/stilleshan/myurls)
 
-> *docker image support for X86 and ARM*
+# Myurls
 
-## 简介
-基于 [CareyWang/MyUrls](https://github.com/CareyWang/MyUrls) 短链接程序的修改版容器镜像,主要解决方便的自定义前端域名以及 ARM64 架构的支持.
+# 目录
 
-## 示例
+[TOC]
+
+# 一、简介
+
+基于[CareyWang/MyUrls](https://github.com/CareyWang/MyUrls)短链接程序的修改版容器镜像，主要解决方便的自定义前端域名，自定义Redis信息以及ARM64架构的支持
+
+# 二、示例
+
 [https://url.siriling.com:81](https://url.siriling.com:81)
 
-## 部署
+# 三、使用
 
-**由于需要搭配`redis`使用，建议使用`docker compose`部署**
+**由于需要搭配Redis使用，建议使用docker compose部署**
 
-### docker
+## docker
 
-默认Redis无密码
+- 默认Redis无密码
+
 
 ```shell
 docker run -d \
@@ -28,23 +32,24 @@ docker run -d \
   -e MYURLS_DOMAIN="url.siriling.com:81" \
   -e MYURLS_TTL="90" \
   -e MYURLS_REDIS="10.10.10.254:6379" \
-  siriling/myurls:latest \
+  -v /root/appdata/myurls/logs:/app/logs
+  siriling/myurls:latest
 ```
 
-### docker compose
-- 下载 [docker-compose.yml](https://raw.githubusercontent.com/stilleshan/dockerfiles/main/myurls/docker-compose.yml)
+## docker compose
+
+- 文件下载：[docker-compose.yml](https://raw.githubusercontent.com/Siriling/dockerfiles/main/myurls/docker-compose.yml)
 - 修改`MYURLS_DOMAIN`为你的域名
-- 修改`MYURLS_TTL`为短链接有效期(单位:天)
+- 修改`MYURLS_TTL`为短链接有效期（单位:天）
+- 修改`MYURLS_REDIS`为自己的Redis的`IP:端口`
+
 ```shell
 docker-compose up -d
 ```
 
-### Nginx 反代
-需要搭配 Nginx 反向代理配置 HTTPS 证书使用,参考`domain.conf`配置文件,注意需要修改`域名`,`证书路径`,`日志路径`
+# 四、Nginx反向代理配置
 
-sub-web访问出现跨域问题
-
-在Nginx里修改
+Sub-web访问出现跨域问题，需要在Nginx里修改，参考[domain.conf](https://raw.githubusercontent.com/Siriling/dockerfiles/main/myurls/domain.conf)
 
 ```shell
 location /{
@@ -54,5 +59,7 @@ location /{
 }
 ```
 
-## 参考
-- [CareyWang/MyUrls](https://github.com/CareyWang/MyUrls)
+# 五、仓库信息
+
+- GitHub：[Siriling/dockerfiles](https://github.com/Siriling/dockerfiles/tree/main/myurls)
+- Docker：[stilleshan/myurls](https://hub.docker.com/r/stilleshan/myurls)
