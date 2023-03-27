@@ -9,7 +9,7 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then export PLATFORM=linux64 ; else if [ "$
   && tar xzf subconverter_${PLATFORM}.tar.gz
 RUN git clone https://github.com/Siriling/sub-web app
 # RUN cd /app && npm install && npm run build
-RUN sed -i "s#customBackend: defaultBackend#customBackend: 'http://127.0.0.1:25500'#g" /app/src/views/Subconverter.vue
+RUN sed -i "s#customBackend: defaultBackend#customBackend: 'http://127.0.0.1:25500/sub?'#g" /app/src/views/Subconverter.vue
 RUN cd /app && yarn install && yarn build
 
 FROM nginx:1.16-alpine
