@@ -1,31 +1,36 @@
 version: "3"
 services:
   subconverter:
-    image: siriling/sub
-    container_name: sub
+    image: siriling/subconverter:latest
+    container_name: subconverter
+    restart: unless-stopped
+    network_mode: bridge
     ports:
-      - 18080:80
+      - 8080:80
+      - 25500:25500
     volumes:
-      - ./conf:/usr/share/nginx/html/conf
-    restart: always
+      - /root/appdata/subconverter/conf:/usr/share/nginx/html/conf
 
   myurls:
     image: siriling/myurls:latest
-    # container_name: myurls
-    environment:
-      - MYURLS_DOMAIN=s.ops.ci
-      - MYURLS_TTL=365
-    volumes:
-      - ./data/myurls/logs:/app/logs    
+    container_name: myurls
+    restart: unless-stopped
+    network_mode: bridge
     ports:
       - "8002:8002"
+    environment:
+      - MYURLS_DOMAIN=url.siriling.com:81
+      - MYURLS_TTL=90
+      - MYURLS_REDIS=10.10.10.254:6379
+    volumes:
+      - /root/appdata/myurls/logs:/app/logs
     depends_on:
       - redis
-    restart: always
 
   redis:
     image: redis:latest
-    # container_name: myurls-redis
+    container_name: myurls-redis
+    restart: unless-stopped
+    network_mode: bridge
     volumes:
-      - ./data/redis:/data
-    restart: always
+      - /root/appdata/redis/data:/data

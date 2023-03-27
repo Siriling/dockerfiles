@@ -1,4 +1,4 @@
-# SubConverter整合
+# SubConverter
 
 # 目录
 
@@ -14,7 +14,7 @@
 
 # 一、简介
 
-基于Sub-web和Subconverter前后端整合容器，支持自定义配置
+基于[Sub-web](https://github.com/Siriling/sub-web)和[Subconverter](https://github.com/tindy2013/subconverter)前后端整合容器，支持短链接，支持自定义配置
 
 # 二、展示
 
@@ -22,26 +22,29 @@
 
 # 三、使用
 
-**由于需要搭配Redis使用，建议使用docker compose部署**
+**如果需要SubConverter前后端整合+短链接，请使用docker compose进行部署**
 
 ## docker
 
-- 修改挂载路径，根据需求自行修改`conf/config.js`中的相关配置
-- subconverter同样支持挂载外部配置文件，参考容器内部路径:`/base/snippets/rulesets.txt`
+- 修改网站名称：添加`-e SITE_NAME='订阅转换'`
+- 修改后端API：添加`-e API_URL='https://sub.siriling.com:81'`
+- 修改短链接网站路径：根据需求自行修改`conf/config.js`中的相关配置
+- subconverter挂载外部配置文件：参考容器内部路径:`/base/snippets/rulesets.txt`
 
 ```shell
 docker run -d \
   --name subconverter \
   --restart=unless-stopped \
   --net='bridge' \
-  -p 80:80 \
+  -p 8080:80 \
+  -p 25500:25500 \
   -v /root/appdata/subconverter/conf:/usr/share/nginx/html/conf \
   siriling/subconverter:latest
 ```
 
 ## docker compose
 
-- 文件下载：[docker-compose.yml](https://raw.githubusercontent.com/Siriling/dockerfiles/main/myurls/docker-compose.yml)
+- 文件下载：[docker-compose.yml](https://raw.githubusercontent.com/Siriling/dockerfiles/main/subconverter/docker-compose.yml)
 
 ```shell
 docker-compose up -d
@@ -55,7 +58,7 @@ docker build -t siriling/subconverter:latest .
 
 # 四、Nginx反向代理配置
 
-Sub-web访问出现跨域问题，需要在Nginx里修改，参考[domain.conf](https://raw.githubusercontent.com/Siriling/dockerfiles/main/myurls/domain.conf)
+Sub-web访问短链接出现跨域问题，需要在Nginx里修改，参考[myurls.conf](https://raw.githubusercontent.com/Siriling/dockerfiles/main/subconverter/myurls.conf)
 
 ```shell
 location /{

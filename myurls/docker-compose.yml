@@ -2,24 +2,23 @@ version: "3"
 services:
   myurls:
     image: siriling/myurls:latest
-    # container_name: myurls
+    container_name: myurls
     restart: unless-stopped
     network_mode: bridge
+    ports:
+      - "8002:8002"
     environment:
       - MYURLS_DOMAIN=url.siriling.com:81
       - MYURLS_TTL=90
       - MYURLS_REDIS=10.10.10.254:6379
     volumes:
       - /root/appdata/myurls/logs:/app/logs
-    ports:
-      - "8002:8002"
     depends_on:
       - redis
 
-
   redis:
     image: redis:latest
-    # container_name: myurls-redis
+    container_name: myurls-redis
     restart: unless-stopped
     network_mode: bridge
     volumes:
