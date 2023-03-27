@@ -12,9 +12,26 @@ Docker：[stilleshan/myurls](https://hub.docker.com/r/stilleshan/myurls)
 [https://url.siriling.com:81](https://url.siriling.com:81)
 
 ## 部署
-### docker compose
-> 由于需要搭配`redis`使用，建议使用`docker compose`部署.
 
+**由于需要搭配`redis`使用，建议使用`docker compose`部署**
+
+### docker
+
+默认Redis无密码
+
+```shell
+docker run -d \
+  --name myurls \
+  --restart=unless-stopped \
+  --net='bridge' \
+  -p 8002:8002 \
+  -e MYURLS_DOMAIN="url.siriling.com:81" \
+  -e MYURLS_TTL="90" \
+  -e MYURLS_REDIS="10.10.10.254:6379" \
+  siriling/myurls:latest \
+```
+
+### docker compose
 - 下载 [docker-compose.yml](https://raw.githubusercontent.com/stilleshan/dockerfiles/main/myurls/docker-compose.yml)
 - 修改`MYURLS_DOMAIN`为你的域名
 - 修改`MYURLS_TTL`为短链接有效期(单位:天)
