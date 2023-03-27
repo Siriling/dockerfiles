@@ -16,5 +16,7 @@ FROM nginx:1.16-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY --from=build /subconverter /base
 COPY . /app
+RUN chmod a+x /app/start.sh
+
 EXPOSE 80
 CMD [ "sh", "-c", "/app/start.sh" ]
