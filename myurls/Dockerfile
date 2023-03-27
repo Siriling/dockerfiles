@@ -13,6 +13,7 @@ WORKDIR /app
 COPY --from=build /app/myurls ./
 COPY public/* ./public/
 COPY start.sh ./
+RUN chmod a+x /app/start.sh
 
 EXPOSE 8002
 CMD [ "sh", "-c", "/app/start.sh" ]
