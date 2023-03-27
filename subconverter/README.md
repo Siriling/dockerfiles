@@ -33,10 +33,10 @@
 
 ```shell
 docker run -d \
-  --name subconverter2 \
+  --name subconverter \
   --restart=unless-stopped \
   --net='bridge' \
-  -p 9996:80 \
+  -p 8080:80 \
   -p 25500:25500 \
   -v /root/appdata/subconverter/conf:/usr/share/nginx/html/conf \
   siriling/subconverter:latest
