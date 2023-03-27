@@ -3,7 +3,7 @@ ARG TARGETARCH
 RUN apk add --update git
 RUN git clone https://github.com/CareyWang/MyUrls /app
 WORKDIR /app
-#有国外环境则不需要
+#有科学上网则不需要
 #RUN go env -w GO111MODULE="on" && go env -w GOPROXY="https://goproxy.cn,direct"
 RUN go mod tidy 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -o myurls main.go 
