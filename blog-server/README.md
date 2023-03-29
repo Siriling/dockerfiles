@@ -29,14 +29,11 @@
 
 ```shell
 docker run -d \
-  --name myurls \
+  --name blog-server \
   --restart=unless-stopped \
   --net='bridge' \
-  -p '8002:8002/tcp' \
-  -e MYURLS_DOMAIN="url.siriling.com:81" \
-  -e MYURLS_TTL="90" \
-  -e MYURLS_REDIS="10.10.10.254:6379" \
-  -v '/root/appdata/myurls/logs':'/app/logs' \
+  -p '8081:8080/tcp' \
+  -v '/mnt/user/appdata/blog-server/auth_key':'/auth_key' \
   siriling/blog-server:latest
 ```
 

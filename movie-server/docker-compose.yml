@@ -1,8 +1,8 @@
 version: "3"
 services:
-  blog-server:
-    image: siriling/blog-server:latest
-    container_name: blog-server
+  movie-server:
+    image: siriling/movie-server:latest
+    container_name: movie-server
     restart: unless-stopped
     # network_mode: bridge
     ports:
@@ -10,14 +10,12 @@ services:
     environment:
       -e API_URL='http://127.0.0.1:25500'
       -e SITE_NAME='订阅转换'
-    volumes:
-      - /root/appdata/movie-server/auth_key:/auth_key
     depends_on:
       - redis
 
   redis:
     image: redis:latest
-    container_name: blog-redis
+    container_name: movie-redis
     restart: unless-stopped
     # network_mode: bridge
     volumes:
