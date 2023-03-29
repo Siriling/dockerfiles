@@ -1,0 +1,24 @@
+version: "3"
+services:
+  blog-server:
+    image: siriling/blog-server:latest
+    container_name: blog-server
+    restart: unless-stopped
+    # network_mode: bridge
+    ports:
+      - 8080:8080
+    environment:
+      -e API_URL='http://127.0.0.1:25500'
+      -e SITE_NAME='订阅转换'
+    volumes:
+      - /root/appdata/blog-server/conf:/usr/share/nginx/html/conf
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: blog-redis
+    restart: unless-stopped
+    # network_mode: bridge
+    volumes:
+      - /root/appdata/redis/data:/dat
