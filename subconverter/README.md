@@ -36,9 +36,9 @@ docker run -d \
   --name subconverter \
   --restart=unless-stopped \
   --net='bridge' \
-  -p 8080:80 \
-  -p 25500:25500 \
-  -v /root/appdata/subconverter/conf:/usr/share/nginx/html/conf \
+  -p '8080:80/tcp' \
+  -p '25500:25500/tcp' \
+  -v '/root/appdata/subconverter/conf':'/usr/share/nginx/html/conf' \
   siriling/subconverter:latest
 ```
 
