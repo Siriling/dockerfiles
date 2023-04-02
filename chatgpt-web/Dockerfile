@@ -2,24 +2,24 @@
 FROM node:lts-alpine AS frontend
 
 RUN apk add --update git
-RUN git clone https://github.com/Chanzhaoyu/chatgpt-web /app
+RUN git clone https://github.com/Chanzhaoyu/chatgpt-web /chatgpt-web
 
 # 自定义头像，名称，描述
-RUN sed -i "s#https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg#https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg#g" /app/src/store/modules/user/helper.ts
-RUN sed -i "s#name: 'ChenZhaoYu'#name: 'Siriling'#g" /app/src/store/modules/user/helper.ts
-# RUN sed -i "s#Star on <a href=\"https://github.com/Chanzhaoyu/chatgpt-bot\" class=\"text-blue-500\" target=\"_blank\" >Github</a>#我的博客#g" /app/src/store/modules/user/helper.ts
+RUN sed -i "s#https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg#https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg#g" /chatgpt-web/src/store/modules/user/helper.ts
+RUN sed -i "s#name: 'ChenZhaoYu'#name: 'Siriling'#g" /chatgpt-web/src/store/modules/user/helper.ts
+# RUN sed -i "s#Star on <a href=\"https://github.com/Chanzhaoyu/chatgpt-bot\" class=\"text-blue-500\" target=\"_blank\" >Github</a>#我的博客#g" /chatgpt-web/src/store/modules/user/helper.ts
 
 RUN npm install pnpm -g
 
 WORKDIR /app
 
-# COPY ./package.json /app
+COPY /chatgpt-web/package.json /app
 
-# COPY ./pnpm-lock.yaml /app
+COPY /chatgpt-web/pnpm-lock.yaml /app
 
 RUN pnpm install
 
-# COPY . /app
+COPY /chatgpt-web /app
 
 RUN pnpm run build
 
@@ -30,13 +30,13 @@ RUN npm install pnpm -g
 
 WORKDIR /app
 
-COPY /app/service/package.json /app
+COPY /chatgpt-web/service/package.json /app
 
-COPY /app/service/pnpm-lock.yaml /app
+COPY /chatgpt-web/service/pnpm-lock.yaml /app
 
 RUN pnpm install
 
-COPY /app/service /app
+COPY /chatgpt-web/service /app
 
 RUN pnpm build
 
@@ -47,13 +47,13 @@ RUN npm install pnpm -g
 
 WORKDIR /app
 
-COPY /app/service/package.json /app
+COPY /chatgpt-web/service/package.json /app
 
-COPY /app/service/pnpm-lock.yaml /app
+COPY /chatgpt-web/service/pnpm-lock.yaml /app
 
 RUN pnpm install --production && rm -rf /root/.npm /root/.pnpm-store /usr/local/share/.cache /tmp/*
 
-COPY /app/service /app
+COPY /chatgpt-web/service /app
 
 COPY --from=frontend /app/dist /app/public
 
