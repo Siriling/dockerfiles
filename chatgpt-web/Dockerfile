@@ -51,7 +51,7 @@ WORKDIR /app
 
 RUN cp /chatgpt-web/service/package.json /app && cp /chatgpt-web/service/pnpm-lock.yaml /app && \
     pnpm install --production && rm -rf /root/.npm /root/.pnpm-store /usr/local/share/.cache /tmp/* && \
-    cp /chatgpt-web/service/* /app  && \
+    cp -r /chatgpt-web/service/* /app  && \
     rm -rf /chatgpt-web
 
 COPY --from=frontend /app/dist /app/public
