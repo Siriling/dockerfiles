@@ -31,8 +31,8 @@ RUN npm install pnpm -g
 WORKDIR /app
 
 RUN cp /chatgpt-web/service/package.json /app && cp /chatgpt-web/service/pnpm-lock.yaml /app && \
-    pnpm install && \
-    cp /chatgpt-web/service /app && \
+    pnpm install
+RUN cp /chatgpt-web/service /app && \
     pnpm build && \
     rm -rf /chatgpt-web
 
