@@ -32,7 +32,7 @@ RUN pnpm install
 
 RUN cp -r /chatgpt-web/service /app && rm -rf /chatgpt-web
 
-RUN pnpm build
+RUN cd /app && pnpm build
 
 # service
 FROM node:lts-alpine
