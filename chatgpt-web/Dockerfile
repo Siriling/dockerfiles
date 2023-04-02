@@ -30,7 +30,7 @@ RUN cp /chatgpt-web/service/package.json /app && cp /chatgpt-web/service/pnpm-lo
     
 RUN pnpm install
 
-RUN cp -r /chatgpt-web/service /app && rm -rf /chatgpt-web
+RUN cp -r /chatgpt-web/service/ /app && rm -rf /chatgpt-web
 RUN echo `ls /app`
 RUN cd /app && pnpm build
 
