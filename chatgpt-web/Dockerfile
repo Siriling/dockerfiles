@@ -2,7 +2,7 @@
 FROM node:lts-alpine AS frontend
 
 RUN apk add --update git
-RUN git clone https://github.com/Chanzhaoyu/chatgpt-web .
+RUN git clone https://github.com/Chanzhaoyu/chatgpt-web /app
 
 # 自定义头像，名称，描述
 RUN sed -i "s#https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg#https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg#g" /app/src/store/modules/user/helper.t
