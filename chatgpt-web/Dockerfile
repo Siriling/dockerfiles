@@ -11,13 +11,10 @@ RUN sed -i "s#name: 'ChenZhaoYu'#name: 'Siriling'#g" /chatgpt-web/src/store/modu
 RUN npm install pnpm -g
 WORKDIR /app
 
-RUN cp /chatgpt-web/package.json /app && cp /chatgpt-web/pnpm-lock.yaml /app && \
+RUN cd /chatgpt-web && \
     pnpm install && \
-    cp -r /chatgpt-web /app
-
-RUN pnpm run build
-
-RUN rm -rf /chatgpt-web
+    pnpm run build && \
+    rm -rf /chatgpt-web
 
 # build backend
 FROM node:lts-alpine as backend
