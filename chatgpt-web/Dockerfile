@@ -13,15 +13,10 @@ RUN npm install pnpm -g
 
 WORKDIR /app
 
-COPY /chatgpt-web/package.json /app
-
-COPY /chatgpt-web/pnpm-lock.yaml /app
-
-RUN pnpm install
-
-COPY /chatgpt-web /app
-
-RUN pnpm run build
+RUN cp /chatgpt-web/package.json /app && cp /chatgpt-web/pnpm-lock.yaml /app && \
+    pnpm install && \
+    cp /chatgpt-web /app && \
+    pnpm run build
 
 # build backend
 FROM node:lts-alpine as backend
@@ -30,15 +25,10 @@ RUN npm install pnpm -g
 
 WORKDIR /app
 
-COPY /chatgpt-web/service/package.json /app
-
-COPY /chatgpt-web/service/pnpm-lock.yaml /app
-
-RUN pnpm install
-
-COPY /chatgpt-web/service /app
-
-RUN pnpm build
+RUN cp /chatgpt-web/service/package.json /app && cp /chatgpt-web/service/pnpm-lock.yaml /app && \
+    pnpm install && \
+    cp /chatgpt-web/service /app && \
+    pnpm build
 
 # service
 FROM node:lts-alpine
@@ -47,13 +37,9 @@ RUN npm install pnpm -g
 
 WORKDIR /app
 
-COPY /chatgpt-web/service/package.json /app
-
-COPY /chatgpt-web/service/pnpm-lock.yaml /app
-
-RUN pnpm install --production && rm -rf /root/.npm /root/.pnpm-store /usr/local/share/.cache /tmp/*
-
-COPY /chatgpt-web/service /app
+RUN cp /chatgpt-web/service/package.json /app && cp/chatgpt-web/service/pnpm-lock.yaml /app && \
+    pnpm install --production && rm -rf /root/.npm /root/.pnpm-store /usr/local/share/.cache /tmp/* && \
+    cp /chatgpt-web/service /app
 
 COPY --from=frontend /app/dist /app/public
 
