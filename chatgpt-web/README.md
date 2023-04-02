@@ -14,7 +14,7 @@
 
 # 一、简介
 
-基于[Chanzhaoyu](https://github.com/Chanzhaoyu)/[chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)ChatGPT网页版的个性化版容器镜像
+基于[Chanzhaoyu/chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)ChatGPT网页版的个性化版容器镜像
 
 # 二、展示
 
