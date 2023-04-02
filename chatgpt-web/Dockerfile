@@ -13,8 +13,10 @@ WORKDIR /app
 
 RUN cp /chatgpt-web/package.json /app && cp /chatgpt-web/pnpm-lock.yaml /app && \
     pnpm install && \
-    cp -r /chatgpt-web /app && \
-    pnpm run build
+    cp -r /chatgpt-web /app
+
+RUN pnpm run build
+
 RUN rm -rf /chatgpt-web
 
 # build backend
